@@ -1,17 +1,17 @@
 <script lang="ts">
 	import { base } from "$app/paths";
 
-	export let id: string;
 	export let src: string;
-	export let alt: string = "post image";
 	export let desc: string = '';
+
+	$: alt = desc;
+	$: id = src;
 
 	export let shadow: boolean = false;
 	export let selectable: boolean = true;
 	export let sharp_edges: boolean = false;
 
 	export let editing: boolean = false;
-
 	
 	function input_select(e: { currentTarget: HTMLInputElement }) {
 		const files = e.currentTarget.files;
@@ -22,14 +22,6 @@
 </script>
 
 <div class="wrapper">
-	<!-- {#if editing}
-	<div class="editor">
-		<label for="{id}_file" >Select an image</label>
-		<input id="{id}_file" type="file" accept="image/*" name="img" on:change={input_select} />
-		<label for="{id}_desc">Description:</label>
-		<input id="{id}_desc" type="text" name="title" bind:value={desc} placeholder="Type here"/>
-	</div>
-	{/if} -->
 	<div class="imgbox" class:shadow>
 		{#if selectable}
 			<input type="checkbox" {id} class="selectimghelper" />
@@ -106,6 +98,7 @@
 	}
 
 	.selectableimg {
+        will-change: transform;
 		transition: transform 250ms ease-in-out;
 
 		opacity: 1;

@@ -3,10 +3,8 @@ import ImageBox from "./ImageBox.svelte";
 export { ImageBox }
 
 export type ImageBoxOpts = {
-    id: string;
 	src: string;
-	alt: string;
-	title?: string;
+	title: string;
 
 	shadow?: boolean;
 	selectable?: boolean;

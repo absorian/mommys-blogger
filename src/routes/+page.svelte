@@ -15,9 +15,7 @@
 	<Heading {editing} text="Hello lorem" />
 	<ImageBox
 		{editing}
-		id="https://www.subhe.com/img/clips/INPUTTYPE2(19)722.jpg"
 		src="https://www.subhe.com/img/clips/INPUTTYPE2(19)722.jpg"
-		alt="test"
 		desc="Test lorem"
 	/>
 </Box>
