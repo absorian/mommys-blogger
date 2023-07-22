@@ -12,7 +12,7 @@
 <header>
 	<div class="headercontent {scrollPos > stickyOffset ? 'sticky' : 'shadow'}">
 		<nav>
-			<Button appearence="solid" href="{base}/comic">Test</Button>
+			<Button appearence="solid" href="{base}/">Log in</Button>
 		</nav>
 		<Button href="{base}/" appearence="transparent">
 			<img class="headerlogo" src="{base}/favicon.png" alt="logo" />
@@ -43,6 +43,7 @@
 
 		--round-main: 1.4em;
 		--main-width: 80em;
+        --short-width: 50em;
 	}
 
 	:global(html, body) {
@@ -67,7 +68,7 @@
 		flex-shrink: 0;
 
 		margin: 0 auto;
-		max-width: var(--main-width);
+		max-width: var(--short-width);
 	}
 
 	footer {
@@ -140,6 +141,31 @@
 	.headerlogo {
 		max-width: 3em;
 	}
+
+
+
+    :global(input, [contenteditable="plaintext-only"]) {
+        background-color: transparent;
+        border: none;
+        border-bottom: 2px solid var(--accent-col);
+
+        padding: 10px;
+    }
+    :global(input) {
+        height: 2em;
+    }
+    :global(::placeholder) { 
+        color: var(--accent-light-col);
+    }
+    :global(input:focus, [contenteditable]:focus) {
+        border-radius: 10px;
+        /* border: none; */
+        outline: none;
+        /* outline: solid 3px var(--accent-col); */
+        box-shadow: 0 0 10px var(--accent-light-tint);
+    }
+
+
 
 	:global(:not(img).shadow) {
 		box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.01);
