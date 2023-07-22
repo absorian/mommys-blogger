@@ -1,6 +1,6 @@
 <script>
 	import { base } from "$app/paths";
-	import Button from '$lib/Button.svelte';
+	import { Button } from '$lib';
 
 	const stickyOffset = 25; // space between content and header
 	const headerHeight = 86;
