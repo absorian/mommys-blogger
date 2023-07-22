@@ -12,10 +12,11 @@
 <header>
 	<div class="headercontent {scrollPos > stickyOffset ? 'sticky' : 'shadow'}">
 		<nav>
-			<Button appearence="solid" href="{base}/">Log in</Button>
+			<Button appearence="solid" href="{base}/login">Log in</Button>
+            <Button appearence="transparent" href="{base}/about">About</Button>
 		</nav>
 		<Button href="{base}/" appearence="transparent">
-			<img class="headerlogo" src="{base}/favicon.png" alt="logo" />
+			Mommys Blogger
 		</Button>
 	</div>
 </header>
@@ -30,6 +31,11 @@
 </div>
 
 <style>
+    @font-face { 
+        font-family: AlloyInk; 
+        src: url('AlloyInk.otf'); 
+    }
+
 	:root {
 		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu,
 			Cantarell, 'Helvetica Neue', sans-serif; 
@@ -134,20 +140,21 @@
 		margin-right: 60px;
 	}
 
-	.headercontent > :global(.Button) {
+    /* logo */
+	.headercontent > :global(.Button) { 
 		margin-left: auto;
-	}
-
-	.headerlogo {
-		max-width: 3em;
-	}
-
-
+        margin-right: 15px;
+        color: var(--accent-col);
+        font-family: AlloyInk;
+        font-size: 2em;
+        padding-top: 5px;
+        -webkit-font-smoothing: subpixel-antialiased;
+        will-change: transform;
+    }
 
     :global(input, [contenteditable="plaintext-only"]) {
         background-color: transparent;
         border: none;
-        border-bottom: 2px solid var(--accent-col);
 
         padding: 10px;
     }

@@ -16,5 +16,8 @@
         font-weight: bolder;
         margin: 0 30px;
         margin-bottom: 0.5em;
+        padding-bottom: 5px;
+        border-bottom: 3px solid var(--accent-col);
     }
+
 </style>
