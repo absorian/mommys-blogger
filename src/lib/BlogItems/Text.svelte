@@ -10,7 +10,7 @@
         display: block;
         font-size: 1em;
 		font-weight: normal;
-        margin: 0;
+        margin: 0 30px;
         margin-bottom: 0.5em;
     }
     p:empty::before {
