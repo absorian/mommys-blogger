@@ -1,6 +1,7 @@
 <script lang="ts">
 	export let type: 'button' | 'submit' | 'reset' | 'link' = 'link';
 	export let href: string = '';
+	export let value: string = '';
 	export let appearence: 'solid' | 'inverse' | 'transparent';
 </script>
 
@@ -9,7 +10,7 @@
 		<slot />
 	</a>
 {:else}
-	<button {type} class="Button btn {appearence}" on:click>
+	<button {type} {value} class="Button btn {appearence}" on:click>
 		<slot />
 	</button>
 {/if}
