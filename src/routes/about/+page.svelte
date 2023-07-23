@@ -39,13 +39,14 @@
 		</ul>
 
 		<Heading text="Link to GitHub Repository" />
-		<p><Button class="button" href="https://github.com/absorian/mommys-blogger" appearence="transparent">Github</Button></p>
+		<p><Button appearence="inverse" href="https://github.com/absorian/mommys-blogger">Github</Button></p>
 
 	</Box>
 	<Box slot="2">
 		<ImageBox src="{base}/about_icon.jpg" desc="Express yourself !" />
 	</Box>
 </ColumnTable>
+
 
 <style>
 	p, ul {
