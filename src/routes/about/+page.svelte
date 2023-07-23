@@ -3,7 +3,7 @@
 
 	import { base } from '$app/paths';
 	import { Box, Button, ColumnTable } from '$lib';
-	import { ImageBox, Heading, Text } from '$lib/BlogItems';
+	import { ImageBox, Heading, Text } from '$lib/BlogPostItem';
 
 </script>
 
