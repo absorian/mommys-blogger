@@ -55,6 +55,9 @@
 		font-weight: normal;
 		margin: 0 30px;
 		margin-bottom: 0.8em;
-		list-style: none;
+	}
+	ul {
+		padding-left: 30px;
+		/* list-style: none; */
 	}
 </style>
