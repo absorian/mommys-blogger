@@ -1,5 +1,5 @@
 <script>
-	import { base } from "$app/paths";
+	import { base } from '$app/paths';
 	import { Button } from '$lib';
 
 	const stickyOffset = 25; // space between content and header
@@ -7,17 +7,17 @@
 	let scrollPos = 0;
 </script>
 
+<link rel="stylesheet" href="{base}/fonts.css">
+
 <svelte:window bind:scrollY={scrollPos} />
 
 <header>
 	<div class="headercontent {scrollPos > stickyOffset ? 'sticky' : 'shadow'}">
 		<nav>
 			<Button appearence="solid" href="{base}/login">Log in</Button>
-            <Button appearence="transparent" href="{base}/about">About</Button>
+			<Button appearence="transparent" href="{base}/about">About</Button>
 		</nav>
-		<Button href="{base}/" appearence="transparent">
-			Mommys Blogger
-		</Button>
+		<Button href="{base}/" appearence="transparent">Mommys Blogger</Button>
 	</div>
 </header>
 
@@ -26,20 +26,14 @@
 		<slot />
 	</main>
 
-	<footer class="shadow">
-	</footer>
+	<footer class="shadow" />
 </div>
 
 <style>
-    @font-face { 
-        font-family: AlloyInk; 
-        src: url('AlloyInk.otf'); 
-    }
-
 	:root {
 		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu,
-			Cantarell, 'Helvetica Neue', sans-serif; 
-        /* hue: 254 */
+			Cantarell, 'Helvetica Neue', sans-serif;
+		/* hue: 254 */
 		--accent-col: rgb(112, 69, 255);
 		--accent-light-col: rgb(165, 139, 252);
 		--accent-darker-col: rgb(62, 38, 141);
@@ -49,7 +43,7 @@
 
 		--round-main: 1.4em;
 		--main-width: 80em;
-        --short-width: 50em;
+		--short-width: 50em;
 	}
 
 	:global(html, body) {
@@ -140,38 +134,37 @@
 		margin-right: 60px;
 	}
 
-    /* logo */
-	.headercontent > :global(.Button) { 
+	/* logo */
+	.headercontent > :global(.Button) {
 		margin-left: auto;
-        margin-right: 15px;
-        color: var(--accent-col);
-        font-family: AlloyInk;
-        font-size: 2em;
-        padding-top: 5px;
-        -webkit-font-smoothing: subpixel-antialiased;
-        will-change: transform;
-    }
+		margin-right: 15px;
+		color: var(--accent-col);
+		font-family: AlloyInk;
+		font-size: 2em;
+		padding-top: 5px;
+		-webkit-font-smoothing: subpixel-antialiased;
+		will-change: transform;
+	}
 
-    :global(input, [contenteditable="plaintext-only"]) {
-        background-color: transparent;
-        border: none;
+	:global(input, [contenteditable='plaintext-only']) {
+		background-color: transparent;
+		border: none;
 
-        padding: 10px;
-    }
-    :global(input) {
-        height: 2em;
-    }
-    :global(::placeholder) { 
-        color: var(--accent-light-col);
-    }
-    :global(input:focus, [contenteditable]:focus) {
-        border-radius: 10px;
-        /* border: none; */
-        outline: none;
-        /* outline: solid 3px var(--accent-col); */
-        box-shadow: 0 0 10px var(--accent-light-tint);
-    }
-
+		padding: 10px;
+	}
+	:global(input) {
+		height: 2em;
+	}
+	:global(::placeholder) {
+		color: var(--accent-light-col);
+	}
+	:global(input:focus, [contenteditable]:focus) {
+		border-radius: 10px;
+		/* border: none; */
+		outline: none;
+		/* outline: solid 3px var(--accent-col); */
+		box-shadow: 0 0 10px var(--accent-light-tint);
+	}
 
 	:global(:not(img).highlight) {
 		box-shadow: 0px 0px 25px var(--accent-light-col);
