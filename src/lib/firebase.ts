@@ -1,17 +1,16 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
 
 // old config
 const firebaseConfig = {
-  apiKey: "AIzaSyCBXbaznoMDxTnDM0CgVFiYrzgnK7RYBAM",
-  authDomain: "ilyas-28ee1.firebaseapp.com",
-  projectId: "ilyas-28ee1",
-  storageBucket: "ilyas-28ee1.appspot.com",
-  messagingSenderId: "745241299666",
-  appId: "1:745241299666:web:e3bee2e83602e7aaacbb0b",
-  measurementId: "G-7XC45FXHK9"
+  apiKey: "AIzaSyAnzIhe0BjQcOdcKP_h7LSYez8wPdp8UNw",
+  authDomain: "mommys-blogger.firebaseapp.com",
+  projectId: "mommys-blogger",
+  storageBucket: "mommys-blogger.appspot.com",
+  messagingSenderId: "937787211366",
+  appId: "1:937787211366:web:9553a116cb297c36c977a7",
+  measurementId: "G-HXTRXR3DMX"
 };
 
 export const app = initializeApp(firebaseConfig);
@@ -20,4 +19,3 @@ export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
 
 export const db = getFirestore(app);
-export const storage = getStorage(app);
