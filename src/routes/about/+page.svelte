@@ -19,29 +19,41 @@
 	<Box slot="1">
 		<Heading text="This project is presented by the team Scavs" />
 		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> Et reiciendis iusto recusandae? Enim
-			facere explicabo praesentium officia est maiores quae officiis, sint, minima perspiciatis
-			temporibus sequi quam nostrum incidunt odit? 
+			Our project provides users with a seamless experience of registering, creating, managing, and deleting posts and videos.
+			Designed with user-friendliness and versatility in mind, our platform offers
+			a dynamic and engaging space for individuals to express themselves through posts and videos.
 		</p>
+
 		<Heading text="Members" />
-		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Et reiciendis iusto recusandae? Enim
-			facere explicabo praesentium officia est maiores quae officiis, sint, minima perspiciatis
-			temporibus sequi quam nostrum incidunt odit?
-			<Button href="" appearence="transparent">Github</Button>
-		</p>
+		<ul>
+			<li>Ismagil Iskakov, i.iskakov@innopolis@university, @absorian</li>
+			<li>Koncheva Darya, d.koncheva@innopolis.university, @darrpyy</li>
+		</ul>
+
+		<Heading text="Tech Stack" />
+		<ul>
+			<li>SvelteKit</li>
+			<li>TypeScript</li>
+			<li>Vite</li>
+			<li>Prettier</li>
+		</ul>
+
+		<Heading text="Link to GitHub Repository" />
+		<p><Button class="button" href="https://github.com/absorian/mommys-blogger" appearence="transparent">Github</Button></p>
+
 	</Box>
 	<Box slot="2">
-		<ImageBox src="{base}/svelte_fill.jpg" desc="Scavs" />
+		<ImageBox src="{base}/about_icon.jpg" desc="Express yourself !" />
 	</Box>
 </ColumnTable>
 
 <style>
-	p {
+	p, ul {
 		display: block;
 		font-size: 1em;
 		font-weight: normal;
 		margin: 0 30px;
-		margin-bottom: 0.5em;
+		margin-bottom: 0.8em;
+		list-style: none;
 	}
 </style>
