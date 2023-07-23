@@ -1,20 +1,38 @@
-<script>
+<script lang="ts">
 	import { base } from '$app/paths';
 	import { Button } from '$lib';
+
+	import { onMount } from 'svelte';
+	import { auth } from '$lib';
+	import { onAuthStateChanged, signOut } from 'firebase/auth';
+
+	import { user } from '$lib';
 
 	const stickyOffset = 25; // space between content and header
 	const headerHeight = 86;
 	let scrollPos = 0;
+
+	async function logOut() {
+		if (!$user) return;
+		await signOut(auth);
+	}
 </script>
 
-<link rel="stylesheet" href="{base}/fonts.css">
+<link rel="stylesheet" href="{base}/fonts.css" />
 
 <svelte:window bind:scrollY={scrollPos} />
 
 <header>
 	<div class="headercontent {scrollPos > stickyOffset ? 'sticky' : 'shadow'}">
 		<nav>
-			<Button appearence="solid" href="{base}/login">Log in</Button>
+			{#if $user}
+				<div>
+					<Button appearence="solid" href="{base}/users/{$user.uid}">Profile</Button>
+					<Button appearence="inverse" type="button" on:click={logOut}>Sign out</Button>
+				</div>
+			{:else}
+				<Button appearence="solid" href="{base}/login">Log in</Button>
+			{/if}
 			<Button appearence="transparent" href="{base}/about">About</Button>
 		</nav>
 		<Button href="{base}/" appearence="transparent">Mommys Blogger</Button>
@@ -128,10 +146,18 @@
 		display: inline-block;
 	}
 
-	.headercontent > nav > :global(.Button) {
+	nav > div {
+		display: inline;
+	}
+	nav > div > :global(.Button) {
 		text-align: center;
 		margin: auto 0;
-		margin-right: 60px;
+		margin-right: 10px;
+	}
+	nav > :global(.Button) {
+		text-align: center;
+		margin: auto 0;
+		margin-left: 60px;
 	}
 
 	/* logo */
