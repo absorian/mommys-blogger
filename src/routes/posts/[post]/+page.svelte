@@ -15,7 +15,7 @@
 		{:else if item.type === 'youtube'}
 			<YoutubeEmbed {...item} />
 		{:else if item.type === 'imgbox'}
-			<ImageBox src={item.src} desc={item.desc} />
+			<ImageBox {...item} />
 		{/if}
 	{/each}
 	<h2>@{data.post.author}</h2>
