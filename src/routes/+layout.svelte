@@ -173,7 +173,9 @@
     }
 
 
-
+	:global(:not(img).highlight) {
+		box-shadow: 0px 0px 25px var(--accent-light-col);
+	}
 	:global(:not(img).shadow) {
 		box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.01);
 	}
