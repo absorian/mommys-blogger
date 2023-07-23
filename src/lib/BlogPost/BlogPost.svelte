@@ -6,14 +6,16 @@
 	export let post: BlogPostData;
 
 	let imgs: ImageBoxData[] = [];
-	let head: HeadingData;
+	let head: HeadingData = {
+		type: "head", text: ""
+	}
 	let text: TextData | undefined;
 
 	let img_width: number;
 	let slide_offset: number = 0;
 	onMount(() => {
 		if (!post.contents) {
-			// err
+			console.log("No Contents!");
 		}
 		imgs = post.contents.filter((val: BlogPostItemData) => {
 			return val.type === 'imgbox';
@@ -52,14 +54,7 @@
 	<div class="texts">
 		<h1>{head.text}</h1>
 		{#if text}
-		<p>{text.text}
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi nesciunt dolorem
-			necessitatibus exercitationem atque illo, ipsam quos deserunt error sint reiciendis doloremque
-			provident eveniet, porro veniam a quasi eum consequuntur? Lorem ipsum dolor sit amet
-			consectetusdfsdfsdfsdfr adipisicing elit. Eligendi nesciunt dolorem necessitatibus
-			exercitationem atque illo, ipsam quos deserunt error sint reiciendis doloremque provident
-			eveniet, porro veniam a quasi eum consequuntur?
-		</p>
+			<p>{text.text}</p>
 		{/if}
 	</div>
 </div>
@@ -80,6 +75,7 @@
 		--imgviewport-width: calc(var(--imgviewport-height) * 1.618);
 
 		transition: all 150ms ease-in-out;
+		cursor: pointer;
 	}
 	.wrapper:hover {
 		box-shadow: 0px 0px 25px var(--background-second-col);

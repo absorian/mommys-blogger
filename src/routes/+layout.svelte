@@ -4,7 +4,7 @@
 
 	import { onMount } from 'svelte';
 	import { auth } from '$lib';
-	import { onAuthStateChanged, signOut } from 'firebase/auth';
+	import { signOut } from 'firebase/auth';
 
 	import { user } from '$lib';
 
@@ -107,10 +107,6 @@
 
 	footer > :global(.Button) {
 		margin-left: 30px;
-	}
-
-	.contactico {
-		max-height: 3em;
 	}
 
 	header {
