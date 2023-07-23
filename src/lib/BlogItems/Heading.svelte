@@ -20,4 +20,8 @@
         border-bottom: 3px solid var(--accent-col);
     }
 
+    input::placeholder {
+        color: var(--background-second-col);
+    }
+
 </style>
