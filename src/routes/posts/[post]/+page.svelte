@@ -1,9 +1,10 @@
 <script lang="ts">
-	import { Box } from '$lib';
-	import type { BlogPostData } from '$lib/BlogPost';
+	import { goto } from '$app/navigation';
+	import { base } from '$app/paths';
+	import { Box, Button } from '$lib';
 	import { Heading, Text, YoutubeEmbed, ImageBox } from '$lib/BlogPostItem';
 
-	export let data: { post: BlogPostData };
+	export let data;
 </script>
 
 <Box>
@@ -18,12 +19,14 @@
 			<ImageBox {...item} />
 		{/if}
 	{/each}
-	<h2>@{data.post.author}</h2>
+	<span />
+	<Button appearence="transparent" href="{base}/users/{data.post.author}">@{data.nick}</Button>
 </Box>
 
 <style>
-	h2 {
-		text-align: end;
-		margin-right: 2em;
+	span + :global(.Button) {
+		font-size: large;
+		margin-top: 1em;
+		margin-left: 30px;
 	}
 </style>

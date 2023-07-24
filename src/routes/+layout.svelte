@@ -7,6 +7,7 @@
 	import { signOut } from 'firebase/auth';
 
 	import { user } from '$lib';
+	import { goto } from '$app/navigation';
 
 	const stickyOffset = 25; // space between content and header
 	const headerHeight = 86;
@@ -15,6 +16,7 @@
 	async function logOut() {
 		if (!$user) return;
 		await signOut(auth);
+		goto(`${base}/`);
 	}
 </script>
 

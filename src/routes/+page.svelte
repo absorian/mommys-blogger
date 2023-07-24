@@ -13,6 +13,7 @@
 </script>
 
 <Box>
+	<h1>Here's the read</h1>
 	{#each posts as { post, id }}
 		<BlogPost
 			{post}
@@ -22,3 +23,9 @@
 		/>
 	{/each}
 </Box>
+
+<style>
+	h1 {
+		margin-left: 8px;
+	}
+</style>

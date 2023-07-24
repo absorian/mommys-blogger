@@ -9,8 +9,6 @@
 		createUserWithEmailAndPassword,
 		signInWithEmailAndPassword,
 		signInWithPopup,
-		GoogleAuthProvider,
-		OAuthCredential
 	} from 'firebase/auth';
 
 	onMount(() => {
@@ -28,7 +26,7 @@
 					.then((userCredential) => {
 						error = '';
 						const user = userCredential.user;
-						goto(`${base}/`);
+						goto(`${base}/users/${user.uid}`);
 					})
 					.catch((err) => {
 						const errorCode = err.code;
@@ -41,7 +39,7 @@
 					.then((userCredential) => {
 						error = '';
 						const user = userCredential.user;
-						goto(`${base}/`);
+						goto(`${base}/users/${user.uid}`);
 					})
 					.catch((err) => {
 						const errorCode = err.code;
@@ -55,25 +53,13 @@
 		signInWithPopup(auth, googleProvider)
 			.then((result) => {
 				error = '';
-				// This gives you a Google Access Token. You can use it to access the Google API.
-				const credential = GoogleAuthProvider.credentialFromResult(result) as OAuthCredential;
-				const token = credential.accessToken;
-				// The signed-in user info.
 				const user = result.user;
-				// IdP data available using getAdditionalUserInfo(result)
-				// ...
-				goto(`${base}/`);
+				goto(`${base}/users/${user.uid}`);
 			})
 			.catch((err) => {
-				// Handle Errors here.
 				const errorCode = err.code;
 				const errorMessage: string = err.message;
 				error = errorMessage.split('Firebase: Error ')[1];
-				// The email of the user's account used.
-				const email = err.customData.email;
-				// The AuthCredential type that was used.
-				const credential = GoogleAuthProvider.credentialFromError(err);
-				// ...
 			});
 	}
 </script>
