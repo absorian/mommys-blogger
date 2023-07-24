@@ -16,5 +16,5 @@ export async function load({ params }) {
     const q = query(collection(db, "posts"), where("author", "==", params.user));
     const postsSnapshot = await getDocs(q);
 
-    return { user: docSnap.data() as UserData, posts: postsSnapshot};
+    return { uid: params.user, user: docSnap.data() as UserData, posts: postsSnapshot};
 }
