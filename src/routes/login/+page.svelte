@@ -3,64 +3,12 @@
 	import { Button, Box, ColumnTable } from '$lib';
 
 	import { onMount } from 'svelte';
-	import { auth, googleProvider } from '$lib';
 	import { goto } from '$app/navigation';
-	import {
-		createUserWithEmailAndPassword,
-		signInWithEmailAndPassword,
-		signInWithPopup,
-	} from 'firebase/auth';
 
-	onMount(() => {
+	export let form;
 
-	});
-
-	let email: string;
-	let password: string;
-	let error: string = '';
-	function formSubmited(e: SubmitEvent) {
-		const action: string = (e.submitter as HTMLButtonElement).value;
-		switch (action) {
-			case 'login':
-				signInWithEmailAndPassword(auth, email, password)
-					.then((userCredential) => {
-						error = '';
-						const user = userCredential.user;
-						goto(`${base}/users/${user.uid}`);
-					})
-					.catch((err) => {
-						const errorCode = err.code;
-						const errorMessage: string = err.message;
-						error = errorMessage.split('Firebase: Error ')[1];
-					});
-				break;
-			case 'register':
-				createUserWithEmailAndPassword(auth, email, password)
-					.then((userCredential) => {
-						error = '';
-						const user = userCredential.user;
-						goto(`${base}/users/${user.uid}`);
-					})
-					.catch((err) => {
-						const errorCode = err.code;
-						const errorMessage: string = err.message;
-						error = errorMessage.split('Firebase: Error ')[1];
-					});
-				break;
-		}
-	}
-	function signWithGoogle() {
-		signInWithPopup(auth, googleProvider)
-			.then((result) => {
-				error = '';
-				const user = result.user;
-				goto(`${base}/users/${user.uid}`);
-			})
-			.catch((err) => {
-				const errorCode = err.code;
-				const errorMessage: string = err.message;
-				error = errorMessage.split('Firebase: Error ')[1];
-			});
+	function clearErr() {
+		if (form) form = { error: '' };
 	}
 </script>
 
@@ -71,32 +19,36 @@
 		<h1>Proud</h1>
 	</Box>
 	<Box slot="2">
-		<form on:submit|preventDefault={formSubmited}>
+		<form method="POST" action="{base}/login?/login">
 			<h2>Log in</h2>
-			<input
+			<input on:change={clearErr}
 				type="text"
 				placeholder="Email"
-				bind:value={email}
+				name="email"
 				pattern={String.raw`\w+@\w+\.[a-z]{2,}$`}
 				title="user@example.com"
 				required
 			/>
-			<input
+			<input on:change={clearErr}
 				type="password"
 				placeholder="Password"
-				bind:value={password}
+				name="password"
 				pattern={String.raw`(?=.*\d)(?=.*[a-zA-Z]).{8,}`}
 				title="At least one number and one lowercase letter, 8 or more characters"
 				required
 			/>
 			<div class="buttonbar">
-				<Button type="submit" value="login" appearence="solid">Login</Button>
-				<Button type="submit" value="register" appearence="inverse">Register</Button>
-				<Button type="button" value="google" appearence="transparent" on:click={signWithGoogle}>
+				<Button type="submit" formaction="{base}/login?/login" appearence="solid">Login</Button>
+				<Button type="submit" formaction="{base}/login?/register" appearence="inverse"
+					>Register</Button
+				>
+				<Button type="submit" formaction="{base}/login?/google" appearence="transparent">
 					<img class="alterlog" src="{base}/favicon.png" alt="google" />
 				</Button>
 			</div>
-			<span>{error}</span>
+			{#if form?.error}
+				<span>{form.error}</span>
+			{/if}
 		</form>
 	</Box>
 </ColumnTable>
