@@ -2,7 +2,6 @@
 	import { base } from '$app/paths';
 	import { Button } from '$lib';
 
-	import { onMount } from 'svelte';
 	import { auth } from '$lib';
 	import { signOut } from 'firebase/auth';
 

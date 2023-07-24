@@ -4,6 +4,6 @@
 	import { Heading } from '$lib/BlogPostItem';
 </script>
 
-<Box >
-	<Heading text="{$page.status}: {$page.error?.message}"/>
+<Box>
+	<Heading text="{$page.status}: {$page.error?.message}" />
 </Box>

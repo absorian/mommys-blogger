@@ -1,10 +1,7 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-
 	import { base } from '$app/paths';
 	import { Box, Button, ColumnTable } from '$lib';
-	import { ImageBox, Heading, Text } from '$lib/BlogPostItem';
-
+	import { ImageBox, Heading } from '$lib/BlogPostItem';
 </script>
 
 <!-- <svelte:head>
@@ -19,9 +16,10 @@
 	<Box slot="1">
 		<Heading text="This project is presented by the team Scavs" />
 		<p>
-			Our project provides users with a seamless experience of registering, creating, managing, and deleting posts and videos.
-			Designed with user-friendliness and versatility in mind, our platform offers
-			a dynamic and engaging space for individuals to express themselves through posts and videos.
+			Our project provides users with a seamless experience of registering, creating, managing, and
+			deleting posts and videos. Designed with user-friendliness and versatility in mind, our
+			platform offers a dynamic and engaging space for individuals to express themselves through
+			posts and videos.
 		</p>
 
 		<Heading text="Members" />
@@ -39,17 +37,18 @@
 		</ul>
 
 		<Heading text="Link to GitHub Repository" />
-		<p><Button appearence="inverse" href="https://github.com/absorian/mommys-blogger">Github</Button></p>
-
+		<p>
+			<Button appearence="inverse" href="https://github.com/absorian/mommys-blogger">Github</Button>
+		</p>
 	</Box>
 	<Box slot="2">
 		<ImageBox src="{base}/about_icon.jpg" desc="Express yourself !" />
 	</Box>
 </ColumnTable>
 
-
 <style>
-	p, ul {
+	p,
+	ul {
 		display: block;
 		font-size: 1em;
 		font-weight: normal;
@@ -58,6 +57,5 @@
 	}
 	ul {
 		padding-left: 30px;
-		/* list-style: none; */
 	}
 </style>

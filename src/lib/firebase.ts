@@ -29,7 +29,7 @@ export const googleProvider = new GoogleAuthProvider();
 export const db = getFirestore(app);
 export const storage = getStorage(app);
 
-export let user = writable<User | null>(null);
+export const user = writable<User | null>(null);
 onAuthStateChanged(auth, (usr) => {
 	user.set(usr);
 });

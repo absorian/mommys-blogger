@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let shadow: boolean = false;
+	export let shadow = false;
 </script>
 
 <div class="Box" class:shadow>
