@@ -52,8 +52,7 @@
 		display: block;
 		font-size: 1em;
 		font-weight: normal;
-		margin: 0 30px;
-		margin-bottom: 0.8em;
+		margin: 0 30px 0.8em;
 	}
 	ul {
 		padding-left: 30px;
