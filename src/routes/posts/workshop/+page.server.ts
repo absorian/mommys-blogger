@@ -14,7 +14,7 @@ export const actions = {
 
 		const newDoc = await addDoc(collection(db, 'posts'), JSON.parse(data));
 
-		throw redirect(302, `${base}/posts/${newDoc.id}`)
+		throw redirect(302, `${base}/posts/${newDoc.id}`);
 	},
 	async update({ request }) {
 		const contaner = await request.formData();
@@ -22,15 +22,15 @@ export const actions = {
 		const id = contaner.get('id');
 
 		await updateDoc(doc(db, 'posts', id), JSON.parse(data));
-		
-		throw redirect(302, `${base}/posts/${id}`)
+
+		throw redirect(302, `${base}/posts/${id}`);
 	},
 	async delete({ request }) {
 		const contaner = await request.formData();
 		const uid = contaner.get('uid');
 
 		await deleteDoc(doc(db, 'posts', uid));
-		
-		throw redirect(302, `${base}/`)
+
+		throw redirect(302, `${base}/`);
 	}
 };

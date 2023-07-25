@@ -6,7 +6,7 @@
 	};
 
 	export let sizes: Size[];
-	export let gap: number = 40;
+	export let gap = 40;
 </script>
 
 <div class="ColumnTable holder" style="gap: {gap}px;">
@@ -46,5 +46,6 @@
 	.holder {
 		display: flex;
 		justify-content: space-between;
+		justify-items: center; /*TODO*/
 	}
 </style>

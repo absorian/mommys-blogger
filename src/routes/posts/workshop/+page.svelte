@@ -68,7 +68,7 @@
 
 	async function checkIfFileExists(path: string) {
 		const storageRef = ref(storage, path);
-		let result: boolean = false;
+		let result = false;
 		await getDownloadURL(storageRef)
 			.then((url) => {
 				result = true;
@@ -126,7 +126,7 @@
 		}
 		publishError = '';
 
-		for(let i = 0; i < posts.length; i++) {
+		for (let i = 0; i < posts.length; i++) {
 			if (posts[i].item.type !== 'imgbox') continue;
 
 			if ((posts[i].item as ImageBoxData).src.includes('mommys-blogger.appspot.com')) continue;
@@ -138,9 +138,9 @@
 
 			// check collision and make name
 			let exists = true;
-			let name: string = '';
+			let name = '';
 			while (exists) {
-				name = makeId(10) + '.' + blob.type.split("/")[1];
+				name = makeId(10) + '.' + blob.type.split('/')[1];
 				exists = await checkIfFileExists(name);
 			}
 
@@ -149,7 +149,7 @@
 			const db_src = await getDownloadURL(res.ref);
 			(posts[i].item as ImageBoxData).src = db_src;
 		}
-		
+
 		let container: FormData = new FormData();
 		let data: BlogPostData = {
 			contents: posts.map((v) => v.item),
@@ -210,7 +210,7 @@
 	<div class="bottomcontrols">
 		<span>{publishError}</span>
 		{#if loadingSpinner}
-			<BarLoader color="#7045ff"/>
+			<BarLoader color="#7045ff" />
 		{/if}
 		<Button appearence="solid" type="button" on:click={publish}>Publish</Button>
 	</div>

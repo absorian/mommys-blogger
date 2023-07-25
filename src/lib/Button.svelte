@@ -1,8 +1,8 @@
 <script lang="ts">
 	export let type: 'button' | 'submit' | 'reset' | 'link' = 'link';
-	export let href: string = '';
-	export let value: string = '';
-	export let formaction: string = '';
+	export let href = '';
+	export let value = '';
+	export let formaction = '';
 	export let appearence: 'solid' | 'inverse' | 'transparent';
 </script>
 

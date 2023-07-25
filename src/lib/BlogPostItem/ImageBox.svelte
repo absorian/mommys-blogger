@@ -2,16 +2,16 @@
 	import { base } from '$app/paths';
 
 	export let src: string;
-	export let desc: string = '';
+	export let desc = '';
 
 	$: alt = desc;
 	$: id = src;
 
-	export let shadow: boolean = false;
-	export let selectable: boolean = true;
-	export let sharp_edges: boolean = false;
-	
-	export let editing: boolean = false;
+	export let shadow = false;
+	export let selectable = true;
+	export let sharp_edges = false;
+
+	export let editing = false;
 
 	function input_select(e: { currentTarget: HTMLInputElement }) {
 		const files = e.currentTarget.files;

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
 	import { page } from '$app/stores';
 	import { Box, Button, user } from '$lib';
@@ -31,7 +30,8 @@
 	<div class="bottom">
 		<Button appearence="transparent" href="{base}/users/{data.post.author}">By: {data.nick}</Button>
 		{#if $user?.uid === data.post.author}
-			<Button appearence="transparent" href="{base}/posts/workshop/{$page.params.post}">Edit</Button>
+			<Button appearence="transparent" href="{base}/posts/workshop/{$page.params.post}">Edit</Button
+			>
 		{/if}
 	</div>
 </Box>

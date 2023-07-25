@@ -2,7 +2,6 @@
 	import { base } from '$app/paths';
 	import { Button } from '$lib';
 
-	import { onMount } from 'svelte';
 	import { auth } from '$lib';
 	import { signOut } from 'firebase/auth';
 
@@ -17,11 +16,13 @@
 	async function logOut() {
 		if (!$user) return;
 		await signOut(auth);
-		if($page.route.id?.startsWith(`${base}/posts/workshop`) || $page.route.id?.startsWith(`${base}/users`)) {
+		if (
+			$page.route.id?.startsWith(`${base}/posts/workshop`) ||
+			$page.route.id?.startsWith(`${base}/users`)
+		) {
 			goto(`${base}/`);
 		}
 	}
-
 </script>
 
 <link rel="stylesheet" href="{base}/fonts.css" />

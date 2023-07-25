@@ -7,15 +7,16 @@
 
 	let imgs: ImageBoxData[] = [];
 	let head: HeadingData = {
-		type: "head", text: ""
-	}
+		type: 'head',
+		text: ''
+	};
 	let text: TextData | undefined;
 
 	let img_width: number;
-	let slide_offset: number = 0;
+	let slide_offset = 0;
 	onMount(() => {
 		if (!post.contents) {
-			console.log("No Contents!");
+			console.log('No Contents!');
 		}
 		imgs = post.contents.filter((val: BlogPostItemData) => {
 			return val.type === 'imgbox';

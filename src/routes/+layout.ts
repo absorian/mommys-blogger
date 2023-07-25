@@ -1,5 +1,4 @@
-	
-import { waitForAuthInit } from "$lib"
+import { waitForAuthInit } from '$lib';
 
 export const ssr = true;
 export const csr = true;
