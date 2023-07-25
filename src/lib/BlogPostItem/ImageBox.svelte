@@ -40,7 +40,7 @@
 		{/if}
 		{#if editing}
 			<p contenteditable="plaintext-only" bind:textContent={desc} />
-		{:else}
+		{:else if desc.length}
 			<p>{desc}</p>
 		{/if}
 	</div>
@@ -76,6 +76,7 @@
 		position: relative;
 		background-color: var(--accent-light-tint);
 		border-radius: var(--round-main);
+		overflow: hidden;
 	}
 	.imgbox > p {
 		margin: 10px 30px;
