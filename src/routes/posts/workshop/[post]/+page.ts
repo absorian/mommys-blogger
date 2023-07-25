@@ -1,4 +1,4 @@
-import { db, type UserData } from "$lib"
+import { db, type UserData, waitForAuthInit, auth } from "$lib"
 import type { BlogPostData } from "$lib/BlogPost/index.js";
 import { error } from "@sveltejs/kit";
 import { doc, getDoc } from "firebase/firestore";
@@ -14,6 +14,13 @@ export async function load({ params }) {
     }
     let res = { post: docSnap.data() as BlogPostData, nick: ""}
 
+    await waitForAuthInit();
+    if(!auth.currentUser?.uid) {
+        throw error(401, {
+            message: "Not allowed to modify"
+        })
+    }
+    
     const userRef = doc(db, "users", res.post.author);
     const userSnap = await getDoc(userRef);
     res.nick = (userSnap.data() as UserData).nickname;

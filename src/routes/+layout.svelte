@@ -8,6 +8,7 @@
 
 	import { user } from '$lib';
 	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 
 	const stickyOffset = 25; // space between content and header
 	const headerHeight = 86;
@@ -16,8 +17,11 @@
 	async function logOut() {
 		if (!$user) return;
 		await signOut(auth);
-		goto(`${base}/`);
+		if($page.route.id?.startsWith(`${base}/posts/workshop`) || $page.route.id?.startsWith(`${base}/users`)) {
+			goto(`${base}/`);
+		}
 	}
+
 </script>
 
 <link rel="stylesheet" href="{base}/fonts.css" />
@@ -63,7 +67,7 @@
 
 		--round-main: 1.4em;
 		--main-width: 80em;
-		--short-width: 50em;
+		--short-width: 80em;
 	}
 
 	:global(html, body) {

@@ -1,7 +1,14 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider, onAuthStateChanged, type User } from 'firebase/auth';
+import {
+	getAuth,
+	GoogleAuthProvider,
+	onAuthStateChanged,
+	type Unsubscribe,
+	type User
+} from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { writable } from 'svelte/store';
+import { getStorage } from "firebase/storage";
 
 // old config
 const firebaseConfig = {
@@ -20,8 +27,18 @@ export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
 
 export const db = getFirestore(app);
+export const storage = getStorage(app);
 
 export let user = writable<User | null>(null);
 onAuthStateChanged(auth, (usr) => {
 	user.set(usr);
 });
+
+export async function waitForAuthInit() {
+	let unsubscribe: Unsubscribe;
+	await new Promise<void>((resolve) => {
+		unsubscribe = auth.onAuthStateChanged(() => resolve());
+	});
+	unsubscribe!();
+	return auth.currentUser;
+}

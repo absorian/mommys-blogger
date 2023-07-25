@@ -2,19 +2,22 @@
 	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
 	import { Box } from '$lib';
-	import { BlogPost, type BlogPostData } from '$lib/BlogPost';
+	import { BlogPost } from '$lib/BlogPost';
 
 	export let data;
-	let posts: { post: BlogPostData; id: string }[] = [];
-
-	data.posts.forEach((doc) => {
-		posts = [{ post: doc.data() as BlogPostData, id: doc.id }, ...posts];
-	});
 </script>
+
+<svelte:head>
+	<style>
+		body {
+			--short-width: 50em;
+		}
+	</style>
+</svelte:head>
 
 <Box>
 	<h1>Here's the read</h1>
-	{#each posts as { post, id }}
+	{#each data.posts as { post, id }}
 		<BlogPost
 			{post}
 			on:click={() => {

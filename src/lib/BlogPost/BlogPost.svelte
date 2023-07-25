@@ -55,6 +55,8 @@
 		<h1>{head.text}</h1>
 		{#if text}
 			<p>{text.text}</p>
+		{:else if imgs.length}
+			<p class="emptyp">Left blank intentionally</p>
 		{/if}
 	</div>
 </div>
@@ -69,7 +71,7 @@
 		overflow: hidden;
 		display: flex;
 		justify-content: left;
-		gap: 15px;
+		/* gap: 15px; */
 
 		--imgviewport-height: 10em;
 		--imgviewport-width: calc(var(--imgviewport-height) * 1.618);
@@ -92,18 +94,23 @@
 	}
 
 	.texts {
+		width: 100%;
 		background-color: white;
-		/* box-shadow: -20px 0px 20px 30px white; */
 		/* width: 100%; */
+		margin-left: 15px;
 		margin-right: 30px;
-		height: var(--imgviewport-height);
+		max-height: var(--imgviewport-height);
 		overflow: hidden;
 	}
 	p {
-		display: contents;
+		/* display: contents; */
 		font-size: 1em;
 		font-weight: normal;
+		padding-bottom: 8px;
 		/* text-overflow: ellipsis; */
+	}
+	.emptyp {
+		color: rgb(167, 167, 167);
 	}
 	h1 {
 		width: 100%;

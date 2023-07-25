@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { base } from "$app/paths";
+	import { base } from '$app/paths';
 
 	export let src: string;
 	export let desc: string = '';
@@ -10,12 +10,12 @@
 	export let shadow: boolean = false;
 	export let selectable: boolean = true;
 	export let sharp_edges: boolean = false;
-
-	export let editing: boolean = false;
 	
+	export let editing: boolean = false;
+
 	function input_select(e: { currentTarget: HTMLInputElement }) {
 		const files = e.currentTarget.files;
-		if(files) {
+		if (files) {
 			src = URL.createObjectURL(files[0]);
 		}
 	}
@@ -34,16 +34,19 @@
 		{/if}
 		{#if editing}
 			<label class="srcedit" for="{id}_srcedit">
-				<img src="{base}/favicon.png" alt="edit">
+				<img class="shadow" src="{base}/edit.png" alt="edit" />
 			</label>
-			<input id="{id}_srcedit" type="file" name="img" on:change={input_select}>
+			<input id="{id}_srcedit" type="file" name="img" on:change={input_select} />
 		{/if}
-		<p contenteditable="{editing ? "plaintext-only" : "false"}">{desc}</p>
+		{#if editing}
+			<p contenteditable="plaintext-only" bind:textContent={desc} />
+		{:else}
+			<p>{desc}</p>
+		{/if}
 	</div>
 </div>
 
 <style>
-
 	.srcedit {
 		margin: 10px;
 		position: absolute;
@@ -52,10 +55,10 @@
 		z-index: 51;
 	}
 	.srcedit > img {
-		width: 50px;
+		width: 3em;
 	}
 
-	input[type="file"] {
+	input[type='file'] {
 		display: none;
 	}
 
@@ -76,7 +79,7 @@
 	}
 	.imgbox > p {
 		margin: 10px 30px;
-        padding: 10px;
+		padding: 10px;
 
 		font-size: 1em;
 		font-weight: normal;
@@ -98,10 +101,11 @@
 	}
 
 	.selectableimg {
-        will-change: transform;
+		will-change: transform;
 		transition: transform 250ms ease-in-out;
 
 		opacity: 1;
+		min-height: 4em;
 	}
 
 	.selectableimglabel {

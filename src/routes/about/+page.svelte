@@ -7,13 +7,13 @@
 
 </script>
 
-<svelte:head>
+<!-- <svelte:head>
 	<style>
 		:root {
 			--short-width: 80em;
 		}
 	</style>
-</svelte:head>
+</svelte:head> -->
 
 <ColumnTable sizes={[{ percentage: 62 }, { percentage: 38, min_size: '400px' }]}>
 	<Box slot="1">

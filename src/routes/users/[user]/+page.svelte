@@ -1,51 +1,83 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
+	import { page } from '$app/stores';
 	import { Box, Button, user } from '$lib';
 	import { BlogPost, type BlogPostData } from '$lib/BlogPost';
+	import { onMount } from 'svelte';
 
 	export let data;
 
-	let posts: { post: BlogPostData; id: string }[] = [];
-	data.posts.forEach((doc) => {
-		posts = [{ post: doc.data() as BlogPostData, id: doc.id }, ...posts];
-	});
+	let editing = false;
+	async function toggleEdit() {
+		editing = !editing;
+		if(editing) return;
+
+		let container: FormData = new FormData();
+		container.append('user', JSON.stringify(data.user));
+		container.append('uid', $page.params.user);
+		const response = await fetch(`${base}/users?/edit`, {
+			method: 'POST',
+			redirect: "manual",
+			body: container
+		});
+	}
+	function parConstrain(e: KeyboardEvent) {
+		if (data.user.desc.length > 220) {
+			e.preventDefault();
+		}
+	}
+	function hConstrain(e: KeyboardEvent) {
+		if (data.user.nickname.length > 25) {
+			e.preventDefault();
+		}
+	}
 </script>
 
 <svelte:head>
 	<style>
-		:root {
+		body {
 			--short-width: 50em;
 		}
 	</style>
 </svelte:head>
+
 <span class="profile" />
 <Box>
 	<img class="profileimg" src={data.user.img} alt="profile" />
 	<div class="profileinfo">
 		<div>
-			<h1>@{data.user.nickname}</h1>
-			{#if $user?.uid === data.uid}
-				<Button appearence="inverse">Edit</Button>
+			{#if editing}
+				<h1 contenteditable="plaintext-only" bind:textContent={data.user.nickname} on:keypress={hConstrain} />
+			{:else}
+				<h1>{data.user.nickname}</h1>
+			{/if}
+			{#if $user?.uid === $page.params.user}
+				<Button appearence={editing ? 'solid' : 'inverse'} on:click={toggleEdit}
+					>{editing ? 'Done' : 'Edit'}</Button
+				>
 			{/if}
 		</div>
-		<p>
-			{data.user.desc}
-			Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero saepe praesentium officia aut
-			iure inventore illum eum, ipsa ratione! Earum sequi ad exercitationem voluptatum reiciendis nam
-			delectus labore vero temporibus.
-		</p>
+		{#if editing}
+			<p
+				contenteditable="plaintext-only"
+				bind:textContent={data.user.desc}
+				on:keypress={parConstrain}
+			/>
+		{:else}
+			<p>{data.user.desc}</p>
+		{/if}
 	</div>
 </Box>
 
 <Box>
 	<div class="postshead">
-		<h1>History</h1>
-		{#if $user?.uid === data.uid}
-			<Button appearence="solid">Add</Button>
+		<h1>Your posts</h1>
+		{#if $user?.uid === $page.params.user}
+			<Button appearence="solid" href="{base}/posts/workshop/">Add</Button>
 		{/if}
 	</div>
-	{#each posts as { post, id }}
+	{#each data.posts as { post, id }}
 		<BlogPost
 			{post}
 			on:click={() => {
@@ -74,7 +106,7 @@
 	.profileinfo {
 		flex: 1 1 auto;
 		height: 10em;
-		overflow: hidden;
+		/* overflow: hidden; */
 	}
 
 	.profileinfo > div,
@@ -83,9 +115,9 @@
 		justify-content: space-between;
 		margin-bottom: 10px;
 	}
-	
+
 	.profileinfo > p {
-		word-wrap:break-word;
+		word-wrap: break-word;
 		word-break: break-all;
 	}
 

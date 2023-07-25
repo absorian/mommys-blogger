@@ -1,12 +1,14 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
-	import { Box, Button } from '$lib';
+	import { page } from '$app/stores';
+	import { Box, Button, user } from '$lib';
 	import { Heading, Text, YoutubeEmbed, ImageBox } from '$lib/BlogPostItem';
 
 	export let data;
 </script>
 
+<span />
 <Box>
 	{#each data.post.contents as item}
 		{#if item.type === 'head'}
@@ -19,12 +21,22 @@
 			<ImageBox {...item} />
 		{/if}
 	{/each}
-	<span />
-	<Button appearence="transparent" href="{base}/users/{data.post.author}">@{data.nick}</Button>
+	<div class="bottom">
+		<Button appearence="transparent" href="{base}/users/{data.post.author}">By: {data.nick}</Button>
+		{#if $user?.uid === data.post.author}
+			<Button appearence="transparent" href="{base}/posts/workshop/{$page.params.post}">Edit</Button>
+		{/if}
+	</div>
 </Box>
 
 <style>
-	span + :global(.Button) {
+	span + :global(.Box) {
+		min-width: 50em;
+	}
+	/* .bottom {
+		
+	} */
+	.bottom > :global(.Button) {
 		font-size: large;
 		margin-top: 1em;
 		margin-left: 30px;

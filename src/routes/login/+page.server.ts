@@ -1,12 +1,12 @@
 import { base } from '$app/paths';
 import { fail, redirect } from '@sveltejs/kit';
-import { auth, googleProvider } from '$lib';
+import { db, auth, googleProvider } from '$lib';
 import {
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
-	signInWithPopup,
-    type UserCredential
+	type UserCredential
 } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
 
 export const actions = {
 	async register({ request }) {
@@ -14,41 +14,50 @@ export const actions = {
 		const email = data.get('email') as string;
 		const password = data.get('password') as string;
 
-        let userCred: UserCredential;
-        try {
-            userCred = await createUserWithEmailAndPassword(auth, email, password)
-        } catch (err: any) {
-            return fail(422, {
-                error: err.code
-            });
-        }
-        throw redirect(302, `${base}/users/${userCred.user.uid}`);
+		let userCred: UserCredential;
+		try {
+			userCred = await createUserWithEmailAndPassword(auth, email, password);
+		} catch (err: any) {
+			return fail(422, {
+				error: err.code
+			});
+		}
+
+		await setDoc(doc(db, 'users', userCred.user.uid), {
+			nickname: `User${Math.floor(Math.random() * 100_000_000)}`,
+			img: 'https://firebasestorage.googleapis.com/v0/b/mommys-blogger.appspot.com/o/profile_placeholder.png?alt=media',
+			desc: 'Hello world!'
+		});
+
+		throw redirect(302, `${base}/users/${userCred.user.uid}`);
 	},
 	async login({ request }) {
 		const data = await request.formData();
 		const email = data.get('email') as string;
 		const password = data.get('password') as string;
 
-        let userCred: UserCredential;
-        try {
-            userCred = await signInWithEmailAndPassword(auth, email, password)
-        } catch (err: any) { // Catch clause variable type annotation must be 'any' or 'unknown' if specified. ts(1196)
-            return fail(422, {
-                error: err.code
-            });
-        }
-        throw redirect(302, `${base}/users/${userCred.user.uid}`);
+		let userCred: UserCredential;
+		try {
+			userCred = await signInWithEmailAndPassword(auth, email, password);
+		} catch (err: any) {
+			// Catch clause variable type annotation must be 'any' or 'unknown' if specified. ts(1196)
+			return fail(422, {
+				error: err.code
+			});
+		}
+		throw redirect(302, `${base}/users/${userCred.user.uid}`);
 	},
-	async google({ request }) {
-        let userCred: UserCredential;
-        try {
-            userCred = await signInWithPopup(auth, googleProvider)
-        } catch (err: any) {
-            return fail(422, {
-                error: err.code
-            });
-        }
-        throw redirect(302, `${base}/users/${userCred.user.uid}`);
+	async createUser({ request }) {
+		const data = await request.formData();
+		const uid = data.get('uid') as string;
+
+		setDoc(doc(db, 'users', uid), {
+			nickname: `User${Math.floor(Math.random() * 100_000_000)}`,
+			img: 'https://firebasestorage.googleapis.com/v0/b/mommys-blogger.appspot.com/o/profile_placeholder.png?alt=media',
+			desc: 'Hello world!'
+		});
+
+		throw redirect(302, `${base}/users/${uid}`);
 	}
 };
 
