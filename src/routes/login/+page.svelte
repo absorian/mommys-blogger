@@ -77,6 +77,11 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Login</title>
+	<meta name="description" content="Login or register using email or google account."/>
+</svelte:head>
+
 <ColumnTable sizes={[{ percentage: 62 }, { percentage: 38 }]}>
 	<Box slot="1">
 		<h1>Create</h1>

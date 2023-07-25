@@ -3,10 +3,17 @@
 	import { base } from '$app/paths';
 	import { page } from '$app/stores';
 	import { Box, Button, user } from '$lib';
-	import { Heading, Text, YoutubeEmbed, ImageBox } from '$lib/BlogPostItem';
+	import { type HeadingData, Heading, Text, YoutubeEmbed, ImageBox } from '$lib/BlogPostItem';
 
 	export let data;
+
+	$: name = (data.post.contents[0] as HeadingData).text
 </script>
+
+<svelte:head>
+	<title>{name}</title>
+	<meta name="description" content="{data.nick}'s' post"/>
+</svelte:head>
 
 <span />
 <Box>

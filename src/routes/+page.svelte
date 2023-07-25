@@ -8,6 +8,8 @@
 </script>
 
 <svelte:head>
+	<title>Main page</title>
+	<meta name="description" content="posts feed"/>
 	<style>
 		body {
 			--short-width: 50em;

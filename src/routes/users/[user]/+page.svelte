@@ -35,6 +35,8 @@
 </script>
 
 <svelte:head>
+	<title>{data.user.nickname}</title>
+	<meta name="description" content="{data.user.nickname} page"/>
 	<style>
 		body {
 			--short-width: 50em;
