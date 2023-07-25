@@ -16,7 +16,7 @@
 	let posts: { item: BlogPostItemData; selected: boolean }[] = [];
 
 	onMount(() => {
-		pullData()
+		pullData();
 	});
 
 	function pullData() {
@@ -75,7 +75,7 @@
 
 	async function checkIfFileExists(path: string) {
 		const storageRef = ref(storage, path);
-		let result: boolean = false;
+		let result = false;
 		await getDownloadURL(storageRef)
 			.then((url) => {
 				result = true;
@@ -132,7 +132,7 @@
 			return;
 		}
 
-		for(let i = 0; i < posts.length; i++) {
+		for (let i = 0; i < posts.length; i++) {
 			if (posts[i].item.type !== 'imgbox') continue;
 
 			if ((posts[i].item as ImageBoxData).src.includes('mommys-blogger.appspot.com')) continue;
@@ -144,9 +144,9 @@
 
 			// check collision and make name
 			let exists = true;
-			let name: string = '';
+			let name = '';
 			while (exists) {
-				name = makeId(10) + '.' + blob.type.split("/")[1];
+				name = makeId(10) + '.' + blob.type.split('/')[1];
 				exists = await checkIfFileExists(name);
 			}
 
@@ -185,7 +185,7 @@
 			body: container
 		});
 		const res = await response.json();
-		
+
 		goto(res.location, {
 			invalidateAll: true
 		});
@@ -241,7 +241,7 @@
 		</div>
 		<span>{publishError}</span>
 		{#if loadingSpinner}
-			<BarLoader color="#7045ff"/>
+			<BarLoader color="#7045ff" />
 		{/if}
 		<Button appearence="solid" type="button" on:click={publishPost}>Update</Button>
 	</div>

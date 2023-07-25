@@ -11,14 +11,14 @@
 	let editing = false;
 	async function toggleEdit() {
 		editing = !editing;
-		if(editing) return;
+		if (editing) return;
 
 		let container: FormData = new FormData();
 		container.append('user', JSON.stringify(data.user));
 		container.append('uid', $page.params.user);
 		const response = await fetch(`${base}/users?/edit`, {
 			method: 'POST',
-			redirect: "manual",
+			redirect: 'manual',
 			body: container
 		});
 	}
@@ -48,7 +48,11 @@
 	<div class="profileinfo">
 		<div>
 			{#if editing}
-				<h1 contenteditable="plaintext-only" bind:textContent={data.user.nickname} on:keypress={hConstrain} />
+				<h1
+					contenteditable="plaintext-only"
+					bind:textContent={data.user.nickname}
+					on:keypress={hConstrain}
+				/>
 			{:else}
 				<h1>{data.user.nickname}</h1>
 			{/if}

@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let text: string;
-	export let editing: boolean = false;
+	export let editing = false;
 </script>
 
 {#if editing}

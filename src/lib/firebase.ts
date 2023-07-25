@@ -8,7 +8,7 @@ import {
 } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { writable } from 'svelte/store';
-import { getStorage } from "firebase/storage";
+import { getStorage } from 'firebase/storage';
 
 // old config
 const firebaseConfig = {
