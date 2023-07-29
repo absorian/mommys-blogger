@@ -3,7 +3,8 @@
 	import { base } from '$app/paths';
 	import { page } from '$app/stores';
 	import { Box, Button, user } from '$lib';
-	import { BlogPost, type BlogPostData } from '$lib/BlogPost';
+	import type { BlogPostData } from '$lib/BlogPost';
+	import { BlogPostPreview } from '$lib/BlogPostPreview';
 	import { onMount } from 'svelte';
 
 	export let data;
@@ -36,7 +37,7 @@
 
 <svelte:head>
 	<title>{data.user.nickname}</title>
-	<meta name="description" content="{data.user.nickname} page"/>
+	<meta name="description" content="{data.user.nickname} page" />
 	<style>
 		body {
 			--short-width: 50em;
@@ -83,13 +84,8 @@
 			<Button appearence="solid" href="{base}/posts/workshop/">Add</Button>
 		{/if}
 	</div>
-	{#each data.posts as { post, id }}
-		<BlogPost
-			{post}
-			on:click={() => {
-				goto(`${base}/posts/${id}`);
-			}}
-		/>
+	{#each data.posts as post}
+		<BlogPostPreview {post} />
 	{/each}
 </Box>
 

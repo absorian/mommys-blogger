@@ -3,6 +3,8 @@ import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firesto
 import type { UserData } from '$lib';
 import { error } from '@sveltejs/kit';
 import type { BlogPostData } from '$lib/BlogPost/index.js';
+import type { BlogPostPreviewData } from '$lib/BlogPostPreview';
+import type { BlogPostItemData, HeadingData, ImageBoxData, TextData } from '$lib/BlogPostItem';
 
 export async function load({ params }) {
 	const docRef = doc(db, 'users', params.user);
@@ -17,13 +19,27 @@ export async function load({ params }) {
 		return docSnap.data() as UserData;
 	};
 
-	const taskUserPosts = async () => {
-		const q = query(collection(db, 'posts'), where('author', '==', params.user));
-		return (await getDocs(q)).docs.map((v) => ({ post: v.data() as BlogPostData, id: v.id }));
+	const taskPosts = async () => {
+		const col = collection(db, 'posts');
+		const docs = await getDocs(col);
+
+		return docs.docs.map((v): BlogPostPreviewData => {
+			const post = v.data() as BlogPostData;
+			return {
+				imgs: post.contents.filter((val: BlogPostItemData) => {
+					return val.type === 'imgbox';
+				}) as ImageBoxData[],
+				head: post.contents[0] as HeadingData, // heading at 0 is req
+				text: post.contents.find((val: BlogPostItemData) => {
+					return val.type === 'text';
+				}) as TextData | undefined,
+				id: v.id
+			}
+		});
 	};
 
 	return {
 		user: taskUserData(),
-		posts: taskUserPosts()
+		posts: taskPosts()
 	};
 }
