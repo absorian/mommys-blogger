@@ -6,40 +6,13 @@
 
 <svelte:head>
 	<title>About</title>
-	<meta name="description" content="team info"/>
+	<meta name="description" content="mommy's blogger about"/>
 </svelte:head>
 
 <ColumnTable sizes={[{ percentage: 62 }, { percentage: 38, min_size: '400px' }]}>
 	<Box slot="1">
-		<Heading text="This project is presented by the team Scavs" />
-		<p>
-			Our project provides users with a seamless experience of registering, creating, managing, and
-			deleting posts and videos. Designed with user-friendliness and versatility in mind, our
-			platform offers a dynamic and engaging space for individuals to express themselves through
-			posts and videos.
-		</p>
-
-		<Heading text="Members" />
-		<ul>
-			<li>Ismagil Iskakov, i.iskakov@innopolis@university, @absorian</li>
-			<li>Koncheva Darya, d.koncheva@innopolis.university, @darrpyy</li>
-		</ul>
-
-		<Heading text="Tech Stack" />
-		<ul>
-			<li>SvelteKit</li>
-			<li>TypeScript</li>
-			<li>Vite</li>
-			<li>Prettier</li>
-		</ul>
-
-		<Heading text="Link to GitHub Repository" />
-		<p>
-			<Button appearence="inverse" href="https://github.com/absorian/mommys-blogger">Github</Button>
-		</p>
 	</Box>
 	<Box slot="2">
-		<ImageBox src="{base}/about_icon.jpg" desc="Express yourself !" />
 	</Box>
 </ColumnTable>
 
