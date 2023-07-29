@@ -1,6 +1,6 @@
 import { base } from '$app/paths';
 import { db, user, type UserData, waitForAuthInit, auth } from '$lib';
-import type { BlogPostData } from '$lib/BlogPost/index.js';
+import type { BlogPostData } from '$lib/BlogPost';
 import { error, fail, redirect } from '@sveltejs/kit';
 import { addDoc, collection, deleteDoc, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 

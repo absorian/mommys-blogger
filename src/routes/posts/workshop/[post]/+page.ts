@@ -1,5 +1,5 @@
 import { db, type UserData, waitForAuthInit, auth } from '$lib';
-import type { BlogPostData } from '$lib/BlogPost/index.js';
+import type { BlogPostData } from '$lib/BlogPost';
 import { error } from '@sveltejs/kit';
 import { doc, getDoc } from 'firebase/firestore';
 
