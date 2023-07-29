@@ -1,35 +1,18 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import type { BlogPostData } from '.';
+	import type { BlogPostPreviewData } from '.';
 	import type { ImageBoxData, HeadingData, TextData, BlogPostItemData } from '$lib/BlogPostItem';
+	import { goto } from '$app/navigation';
+	import { base } from '$app/paths';
 
-	export let post: BlogPostData;
-
-	let imgs: ImageBoxData[] = [];
-	let head: HeadingData = {
-		type: 'head',
-		text: ''
-	};
-	let text: TextData | undefined;
+	export let post: BlogPostPreviewData;
 
 	let img_width: number;
 	let slide_offset = 0;
 	onMount(() => {
-		if (!post.contents) {
-			console.log('No Contents!');
-		}
-		imgs = post.contents.filter((val: BlogPostItemData) => {
-			return val.type === 'imgbox';
-		}) as ImageBoxData[];
-
-		head = post.contents[0] as HeadingData; // heading at 0 is req
-		text = post.contents.find((val: BlogPostItemData) => {
-			return val.type === 'text';
-		}) as TextData | undefined;
-
 		let slide_counter = 0;
 		setInterval(() => {
-			if (slide_counter++ < imgs.length - 1) {
+			if (slide_counter++ < post.imgs.length - 1) {
 				slide_offset += img_width;
 				return;
 			}
@@ -39,11 +22,20 @@
 	});
 </script>
 
-<div class="wrapper shadow" role="button" aria-pressed="false" tabindex="0" on:click on:keydown>
-	{#if imgs.length}
+<div
+	class="wrapper shadow"
+	role="button"
+	aria-pressed="false"
+	tabindex="0"
+	on:click={() => {
+		goto(`${base}/posts/${post.id}`);
+	}}
+	on:keydown
+>
+	{#if post.imgs.length}
 		<div class="imgviewport" bind:clientWidth={img_width}>
 			<div class="imgslider" style="left: {-slide_offset}px;">
-				{#each imgs as i}
+				{#each post.imgs as i}
 					<div class="imgcontainer">
 						<img src={i.src} alt="" />
 						<div class="imgbackground" style:background-image="url('{i.src}')" />
@@ -53,10 +45,10 @@
 		</div>
 	{/if}
 	<div class="texts">
-		<h1>{head.text}</h1>
-		{#if text}
-			<p>{text.text}</p>
-		{:else if imgs.length}
+		<h1>{post.head.text}</h1>
+		{#if post.text}
+			<p>{post.text.text}</p>
+		{:else if post.imgs.length}
 			<p class="emptyp">Left blank intentionally</p>
 		{/if}
 	</div>

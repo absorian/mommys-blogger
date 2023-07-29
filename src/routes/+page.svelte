@@ -1,15 +1,14 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import { base } from '$app/paths';
+	// import { goto } from '$app/navigation';
 	import { Box } from '$lib';
-	import { BlogPost } from '$lib/BlogPost';
+	import { BlogPostPreview } from '$lib/BlogPostPreview';
 
 	export let data;
 </script>
 
 <svelte:head>
 	<title>Main page</title>
-	<meta name="description" content="posts feed"/>
+	<meta name="description" content="posts feed" />
 	<style>
 		body {
 			--short-width: 50em;
@@ -19,13 +18,8 @@
 
 <Box>
 	<h1>Here's the read</h1>
-	{#each data.posts as { post, id }}
-		<BlogPost
-			{post}
-			on:click={() => {
-				goto(`${base}/posts/${id}`);
-			}}
-		/>
+	{#each data.posts as post}
+		<BlogPostPreview {post} />
 	{/each}
 </Box>
 
