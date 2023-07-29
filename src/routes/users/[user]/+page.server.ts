@@ -20,7 +20,6 @@ export async function load({ params }) {
 	};
 
 	const taskPosts = async () => {
-		const col = collection(db, 'posts');
 		const q = query(collection(db, 'posts'), where('author', '==', params.user));
 		const docs = await getDocs(q);
 
