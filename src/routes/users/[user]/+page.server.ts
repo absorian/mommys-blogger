@@ -21,7 +21,8 @@ export async function load({ params }) {
 
 	const taskPosts = async () => {
 		const col = collection(db, 'posts');
-		const docs = await getDocs(col);
+		const q = query(collection(db, 'posts'), where('author', '==', params.user));
+		const docs = await getDocs(q);
 
 		return docs.docs.map((v): BlogPostPreviewData => {
 			const post = v.data() as BlogPostData;
