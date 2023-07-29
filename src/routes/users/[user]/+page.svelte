@@ -78,7 +78,7 @@
 
 <Box>
 	<div class="postshead">
-		<h1>Your posts</h1>
+		<h1>{data.user.nickname}'s posts</h1>
 		{#if $user?.uid === $page.params.user}
 			<Button appearence="solid" href="{base}/posts/workshop/">Add</Button>
 		{/if}
