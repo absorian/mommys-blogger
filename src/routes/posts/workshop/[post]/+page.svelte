@@ -190,10 +190,13 @@
 			invalidateAll: true
 		});
 	}
+
+	let stickyEditOffset;
 </script>
 
 <Box>
-	<div class="controls">
+	<span bind:this={stickyEditOffset}></span>
+	<div class="controls shadow" style="top: {stickyEditOffset?.getBoundingClientRect().top}px">
 		<form on:submit|preventDefault={addElement}>
 			<Button appearence="solid" type="submit">Add</Button>
 			<select name="type">
@@ -267,9 +270,14 @@
 	}
 
 	.controls {
+		background-color: white;
+		border-radius: var(--round-main);
+		outline: 8px solid white;
+		position: sticky;
 		display: flex;
 		justify-content: space-between;
 		margin-bottom: 20px;
+		z-index: 101;
 	}
 	.controls > div > :global(*) {
 		margin-left: 5px;
