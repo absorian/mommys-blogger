@@ -15,8 +15,12 @@
 
 	let posts: { item: BlogPostItemData; selected: boolean }[] = [];
 
+	let stickyEditOffsetElem: HTMLElement;
+	let stickyEditOffset = 0;
+
 	onMount(() => {
 		pullData();
+		stickyEditOffset = stickyEditOffsetElem?.getBoundingClientRect().top; // set once
 	});
 
 	function pullData() {
@@ -191,12 +195,11 @@
 		});
 	}
 
-	let stickyEditOffset;
 </script>
 
 <Box>
-	<span bind:this={stickyEditOffset}></span>
-	<div class="controls shadow" style="top: {stickyEditOffset?.getBoundingClientRect().top}px">
+	<span bind:this={stickyEditOffsetElem}></span>
+	<div class="controls shadow" style="top: {stickyEditOffset}px">
 		<form on:submit|preventDefault={addElement}>
 			<Button appearence="solid" type="submit">Add</Button>
 			<select name="type">
@@ -277,7 +280,7 @@
 		display: flex;
 		justify-content: space-between;
 		margin-bottom: 20px;
-		z-index: 101;
+		z-index: 52;
 	}
 	.controls > div > :global(*) {
 		margin-left: 5px;
