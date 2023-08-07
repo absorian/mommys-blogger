@@ -6,8 +6,11 @@ import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
 
 export async function load() {
 	const taskPosts = async () => {
+		console.log("begin");
+		
 		const col = collection(db, 'posts');
 		const docs = await getDocs(col);
+		console.log("getDocs done");
 
 		return docs.docs.map((v): BlogPostPreviewData => {
 			const post = v.data() as BlogPostData;
